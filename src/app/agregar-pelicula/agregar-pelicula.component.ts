@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PeliculasService } from '../services/peliculas.service';
 import { Pelicula } from '../models/pelicula.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-pelicula',
@@ -19,7 +20,7 @@ export class AgregarPeliculaComponent {
 
   selectedImageFile: File | null = null;
 
-  constructor(private peliculasService: PeliculasService) {}
+  constructor(private router: Router, private peliculasService: PeliculasService) {}
 
   agregarPelicula(): void {
     console.log('Datos a enviar:', this.nuevaPelicula, this.selectedImageFile);
@@ -83,6 +84,10 @@ export class AgregarPeliculaComponent {
       const blob = new Blob([reader.result as ArrayBuffer], { type: file.type });
       this.nuevaPelicula.imagen = blob;
     };
+  }
+
+  volver(): void {
+    this.router.navigate(['/peliculas']);
   }
   
 }

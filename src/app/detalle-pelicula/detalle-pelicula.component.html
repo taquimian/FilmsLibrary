@@ -1,20 +1,32 @@
-<div>
+<div class="detalle-container">
   <h2>Detalles de la Película</h2>
-  <form [formGroup]="detalleForm">
-    <label>Título:</label>
-    <input type="text" formControlName="titulo" [disabled]="camposDeshabilitados">
+  <div class="detalle-content">
+    <div class="imagen-container">
+      <!-- Aquí va tu imagen -->
+      <div class="imagen-pelicula" [style.background-image]="getImagenUrl()" [style.height.px]="400">
+      </div>
+    </div>
+    <div class="info-container">
+      <form [formGroup]="detalleForm">
+        <div class="detalle-field">
+          <label>Título:</label>
+          <input type="text" formControlName="titulo" [disabled]="camposDeshabilitados">
+        </div>
 
-    <label>Descripción:</label>
-    <textarea formControlName="descripcion" [disabled]="camposDeshabilitados"></textarea>
+        <div class="detalle-field">
+          <label>Descripción:</label>
+          <textarea formControlName="descripcion" [disabled]="camposDeshabilitados"></textarea>
+        </div>
 
-    <label>Año:</label>
-    <input type="number" formControlName="anio" [disabled]="camposDeshabilitados">
+        <div class="detalle-field">
+          <label>Año:</label>
+          <input type="number" formControlName="anio" [disabled]="camposDeshabilitados">
+        </div>
 
-    <label>Imagen:</label>
-    <div class="imagen-pelicula" [style.background-image]="getImagenUrl()"></div>
+        <!-- Agrega más campos según tus datos -->
 
-    <!-- Agrega más campos según tus datos -->
-
-    <button (click)="volver()">Volver</button>
-  </form>
+        <button (click)="volver()">Volver</button>
+      </form>
+    </div>
+  </div>
 </div>

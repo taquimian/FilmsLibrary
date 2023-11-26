@@ -1,5 +1,6 @@
 <div>
-  <h2>Lista de Películas</h2>
+  <h2>FilmsLibrary</h2>
+  <button (click)="redirigirAAgregarPelicula()">Agregar Película</button>
   <table class="peliculas-table">
     <ng-container *ngFor="let chunk of chunkArray(peliculas, 5)">
       <tr>

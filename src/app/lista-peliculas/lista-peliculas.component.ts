@@ -54,6 +54,10 @@ export class ListaPeliculasComponent implements OnInit {
   verDetallePelicula(idPelicula: number): void {
     this.router.navigate(['/detalle-pelicula', idPelicula]);
   }
+
+  redirigirAAgregarPelicula(): void {
+    this.router.navigate(['/agregar-pelicula']);
+  }
   
   eliminarPelicula(id: number): void {
     // Lógica para eliminar la película con el ID especificado de la lista y de la base de datos
