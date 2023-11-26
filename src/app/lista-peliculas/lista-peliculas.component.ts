@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pelicula } from '../models/pelicula.model';
 import { PeliculasService } from '../services/peliculas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-peliculas',
@@ -10,7 +11,8 @@ import { PeliculasService } from '../services/peliculas.service';
 export class ListaPeliculasComponent implements OnInit {
   peliculas: Pelicula[] = [];
 
-  constructor(private peliculasService: PeliculasService) { }
+  constructor(private router: Router, private peliculasService: PeliculasService) {}
+  
 
   ngOnInit(): void {
     this.obtenerPeliculas();
@@ -47,6 +49,10 @@ export class ListaPeliculasComponent implements OnInit {
   arrayBufferToBase64(buffer: any[]): string {
     const binary = buffer.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
     return btoa(binary);
+  }
+
+  verDetallePelicula(idPelicula: number): void {
+    this.router.navigate(['/detalle-pelicula', idPelicula]);
   }
   
   eliminarPelicula(id: number): void {

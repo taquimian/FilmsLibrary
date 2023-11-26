@@ -15,8 +15,17 @@ export class PeliculasService {
       return this.http.post<any>(`${this.apiUrl}/agregar`, pelicula);
     }
 
+    modificarPelicula(id: number, pelicula: FormData): Observable<any> {
+      return this.http.post<any>(`${this.apiUrl}/modificar/${id}`, pelicula);
+    }
+
     // Método para obtener todas las películas
     obtenerPeliculas(): Observable<Pelicula[]> {
       return this.http.get<Pelicula[]>(`${this.apiUrl}/listar`);
+    }
+
+    obtenerPeliculaPorId(id: number): Observable<Pelicula> {
+      return this.http.get<Pelicula>(`${this.apiUrl}/obtener/${id}`);
+      // Ajusta la URL y la lógica para obtener la película por su ID desde tu backend
     }
 }

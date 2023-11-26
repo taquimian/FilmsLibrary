@@ -6,8 +6,8 @@ import { AgregarPeliculaComponent } from './agregar-pelicula/agregar-pelicula.co
 
 const routes: Routes = [
   { path: 'peliculas', component: ListaPeliculasComponent },
-  { path: 'pelicula/:id', component: DetallePeliculaComponent },
-  { path: 'agregar-pelicula', component: AgregarPeliculaComponent }
+  { path: 'agregar-pelicula', component: AgregarPeliculaComponent },
+  { path: 'detalle-pelicula/:id', component: DetallePeliculaComponent }
   // ... Puedes seguir agregando rutas según la estructura de tu aplicación
 ];
 

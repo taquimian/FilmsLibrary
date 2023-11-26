@@ -59,6 +59,35 @@ function obtenerExtension(nombreArchivo) {
   return splitArray[splitArray.length - 1];
 }
 
+// Ruta para obtener una película por su ID
+app.get('/api/peliculas/obtener/:id', (req, res) => {
+  const idPelicula = req.params.id; // ID de la película a buscar en la base de datos
+
+  const query = 'SELECT id, titulo, descripcion, anio, imagen, nombreImagen FROM peliculas WHERE id = ?';
+  connection.query(query, [idPelicula], (error, results) => {
+    if (error) {
+      console.error('Error al obtener la película por ID:', error);
+      res.status(500).json({ error: 'Error al obtener la película por ID' });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ error: 'Película no encontrada' });
+      return;
+    }
+
+    const pelicula = results[0];
+    if (pelicula.imagen && Buffer.isBuffer(pelicula.imagen) && pelicula.nombreImagen) {
+      const base64Image = Buffer.from(pelicula.imagen).toString('base64');
+      const extension = obtenerExtension(pelicula.nombreImagen);
+      pelicula.imagen = `data:image/${extension};base64,${base64Image}`;
+    }
+
+    res.json(pelicula);
+  });
+});
+
+
 app.post('/api/peliculas/agregar', upload.single('imagen'), (req, res) => {
   const nuevaPelicula = req.body;
   const imagen = req.file; // La imagen se encuentra en req.file
@@ -77,6 +106,45 @@ app.post('/api/peliculas/agregar', upload.single('imagen'), (req, res) => {
     // Manejo de errores y respuesta al cliente
   });
 });
+
+app.post('/api/peliculas/modificar/:id', upload.single('imagen'), (req, res) => {
+  const idPelicula = req.params.id; // ID de la película a modificar
+  const datosActualizados = req.body;
+  const nuevaImagen = req.file; // Nueva imagen, si se proporciona
+
+  // Construir la consulta de actualización (UPDATE) según los campos que se desean modificar
+  let query = 'UPDATE peliculas SET ';
+  const values = [];
+  
+  // Comprobar y agregar los campos que se desean actualizar
+  if (datosActualizados.titulo) {
+    query += 'titulo = ?, ';
+    values.push(datosActualizados.titulo);
+  }
+  if (datosActualizados.descripcion) {
+    query += 'descripcion = ?, ';
+    values.push(datosActualizados.descripcion);
+  }
+  if (datosActualizados.anio) {
+    query += 'anio = ?, ';
+    values.push(datosActualizados.anio);
+  }
+  if (nuevaImagen) {
+    query += 'imagen = ?, nombreImagen = ?, ';
+    values.push(nuevaImagen.buffer); // Verifica si la referencia correcta es 'nuevaImagen.buffer' o 'nuevaImagen' para la actualización del blob
+    values.push(datosActualizados.nombreImagen);
+  }
+  
+  // Eliminar la coma final y agregar la condición WHERE con el ID de la película
+  query = query.slice(0, -2); // Eliminar la última coma y espacio
+  query += ' WHERE id = ?';
+  values.push(idPelicula);
+
+  connection.query(query, values, (error, results) => {
+    // Manejo de errores y respuesta al cliente
+  });
+});
+
 
 
 // Otros endpoints para realizar operaciones CRUD
