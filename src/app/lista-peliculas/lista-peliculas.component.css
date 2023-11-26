@@ -1,0 +1,47 @@
+.peliculas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pelicula-item {
+  max-width: 300px;
+  margin: 10px; /* Modifica este valor para reducir el espacio entre tarjetas */
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  width: 600px; /* 50% - margen entre tarjetas */
+}
+
+.imagen-pelicula {
+  width: 170px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 20px;
+}
+
+.pelicula-info {
+  flex: 1;
+}
+
+.eliminar-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Ajusta estos estilos según tu preferencia */
+h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+}

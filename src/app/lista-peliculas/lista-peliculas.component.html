@@ -1,0 +1,23 @@
+<div>
+  <h2>Lista de Películas</h2>
+  <table class="peliculas-table">
+    <ng-container *ngFor="let chunk of chunkArray(peliculas, 2)">
+      <tr>
+        <ng-container *ngFor="let pelicula of chunk">
+          <td *ngIf="pelicula">
+            <div class="pelicula-item">
+              <div class="imagen-pelicula" [style.background-image]="'url(' + pelicula.urlImagen + ')'"
+                [style.height.px]="170">
+              </div>
+              <div class="pelicula-info">
+                <h3>{{ pelicula.titulo }}</h3>
+                <p>{{ pelicula.descripcion }}</p>
+                <span (click)="eliminarPelicula(pelicula.id)" class="eliminar-icon">X</span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+  </table>
+</div>

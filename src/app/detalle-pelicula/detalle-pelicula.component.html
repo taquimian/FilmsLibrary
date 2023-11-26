@@ -1,0 +1,14 @@
+<div *ngIf="pelicula">
+    <h2>Detalle de la Película</h2>
+    <div class="detalle-pelicula">
+      <img [src]="pelicula.imagen" alt="{{ pelicula.titulo }}" class="pelicula-imagen">
+      <div class="pelicula-info">
+        <h3>{{ pelicula.titulo }}</h3>
+        <p>{{ pelicula.descripcion }}</p>
+        <p>Año: {{ pelicula.anio }}</p>
+        <!-- Agrega más detalles si es necesario -->
+        <button (click)="eliminarPelicula(pelicula.id)">Eliminar Película</button>
+      </div>
+    </div>
+  </div>
+  

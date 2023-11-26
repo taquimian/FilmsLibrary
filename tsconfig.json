@@ -23,6 +23,11 @@
       "dom"
     ]
   },
+  "include": [
+    "src/main.ts",
+    "src/main.server.ts",
+    // ... otros archivos que necesites incluir ...
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

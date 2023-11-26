@@ -1,0 +1,20 @@
+<div>
+  <h2>Agregar Película</h2>
+  <form (ngSubmit)="agregarPelicula()">
+    <label>Título:</label>
+    <input type="text" [(ngModel)]="nuevaPelicula.titulo" name="titulo" required>
+    
+    <label>Descripción:</label>
+    <textarea [(ngModel)]="nuevaPelicula.descripcion" name="descripcion" required></textarea>
+    
+    <label>Año:</label>
+    <input type="number" [(ngModel)]="nuevaPelicula.anio" name="anio" required>
+    
+    <label>Imagen:</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    
+    <!-- Agrega más campos según tus datos -->
+
+    <button type="submit" name="agregar">Agregar</button>
+  </form>
+</div>
